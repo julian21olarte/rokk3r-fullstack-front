@@ -1,3 +1,4 @@
+import { DatePipe } from './pipes/date.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +19,8 @@ import { EditTaskComponent } from './components/edit-task/edit-task.component';
     HomeComponent,
     ListComponent,
     AddTaskComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    DatePipe
   ],
   imports: [
     RoutingModule,

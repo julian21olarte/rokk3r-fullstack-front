@@ -2,6 +2,7 @@ import { fadeBottom } from './../../animations/fadeBottom';
 import { TaskService } from './../../services/task.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-edit-task',
@@ -23,11 +24,7 @@ export class EditTaskComponent implements OnInit {
       this.router.navigate(['home']);
       return;
     }
-    const date = new Date(this.task.dueDate);
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-    this.formatDate =  year + '-' + month + '-' + day;
+    this.formatDate = moment.utc(this.task.dueDate).format('YYYY-MM-DD');
   }
 
   public editTask(): void {
