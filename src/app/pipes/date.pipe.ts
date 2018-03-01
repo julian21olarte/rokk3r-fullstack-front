@@ -7,7 +7,7 @@ import * as moment from 'moment';
 export class DatePipe implements PipeTransform {
 
     transform(value: string) {
-        return moment.utc(value).format('LL');
+        return moment.utc(value).format('ll');
     }
 
 }
