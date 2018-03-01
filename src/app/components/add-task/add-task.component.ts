@@ -1,3 +1,4 @@
+import { fadeBottom } from './../../animations/fadeBottom';
 import { TaskService } from './../../services/task.service';
 import { Http } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +7,10 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
-  styleUrls: ['./add-task.component.css']
+  styleUrls: ['./add-task.component.css'],
+  animations: [
+    fadeBottom
+  ]
 })
 export class AddTaskComponent implements OnInit {
 
@@ -28,7 +32,6 @@ export class AddTaskComponent implements OnInit {
       alert('Please complete all fields!');
       return false;
     }
-    console.log(task);
     this.taskService.addTask(task)
     .subscribe(taskStored => {
       alert('task added successfully!');

@@ -1,3 +1,4 @@
+import { fadeBottom } from './../../animations/fadeBottom';
 import { TaskService } from './../../services/task.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,7 +6,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-edit-task',
   templateUrl: './edit-task.component.html',
-  styleUrls: ['./edit-task.component.css']
+  styleUrls: ['./edit-task.component.css'],
+  animations: [
+    fadeBottom
+  ]
 })
 export class EditTaskComponent implements OnInit {
 
@@ -24,10 +28,9 @@ export class EditTaskComponent implements OnInit {
     const month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
     const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
     this.formatDate =  year + '-' + month + '-' + day;
-    console.log(this.formatDate);
   }
 
-  public editTask() {
+  public editTask(): void {
     this.task.dueDate = new Date(this.formatDate);
     this.taskService.editTask(this.task)
     .subscribe(taskUpdated => {

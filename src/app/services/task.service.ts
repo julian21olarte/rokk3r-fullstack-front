@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TaskService {
@@ -12,43 +13,40 @@ export class TaskService {
         this.currentTask = null;
     }
 
-    public getTasks() {
+    public getTasks(): Observable<any> {
         return this.http.get(this.url);
     }
 
-    public addTask(task) {
+    public addTask(task): Observable<any> {
         const data = {
             name: task.name,
             dueDate: task.dueDate,
             priority: task.priority
         };
-        console.log(data);
         let url = this.url + '/create';
         url += '?name=' + task.name;
         url += '&dueDate=' + task.dueDate;
         url += '&priority=' + task.priority;
-        console.log(url);
         return this.http.post(url, {});
     }
 
-    public deleteTask(id) {
+    public deleteTask(id): Observable<any> {
         return this.http.get(`${this.url}/destroy/${id}`);
     }
 
-    public editTask(task) {
+    public editTask(task): Observable<any> {
         return this.http.post(this.url + '/update', { task, taskId: task._id });
     }
 
-    public getCurrentTask() {
+    public getCurrentTask(): any {
         return this.currentTask;
     }
 
-    public setCurrentTask(task: any) {
-        console.log(task);
+    public setCurrentTask(task: any): any {
         this.currentTask = task;
     }
 
-    public validateTask(task: any) {
+    public validateTask(task: any): Boolean {
         return task && !Object.values(task).some(val => val == null || val === undefined || val === '');
     }
 }
